@@ -1,0 +1,28 @@
+<h2>User Form</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="submit()">
+<label for="name">Name </label>
+<input id="name" type="text" formControlName="name" >
+<br><br>
+<label for="email">Email </label>
+<input id="email" type="email" formControlName="email">
+<br><br>
+<label for="phn">Phone Number </label>
+<input id="phn" type="text" formControlName="phnNumber">
+<br/><br/>
+
+<!-- <p style="display: inline;" (click)="addExperience()" >Ecperience: </p> <button>Add Experience</button> -->
+
+<ol formArrayName="experiences">
+    <li *ngFor="let exp of experiences.controls; let i = index">
+      <input type="text"  > 
+      <button (click)="remove(i)">Remove</button>
+    </li>
+</ol>
+
+  <button type="button" (click)="addExperience()">Add Experience Field</button>
+
+
+
+<!-- <button (click)="submit()">Show</button> -->
+</form>
