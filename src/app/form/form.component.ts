@@ -23,11 +23,12 @@ export class FormComponent{
   constructor(private formBuilder: FormBuilder,private userService: UsersService ) {
     this.userService.getValue().subscribe((data) => {
       this.usersData = data;
+      console.log(data)
       this.userForm = new FormGroup({
         name: new FormControl(this.usersData[0].name),
         email: new FormControl(this.usersData[0].email),
         phnNumber: new FormControl(this.usersData[0].phnNumber),
-        experiences: this.formBuilder.array(this.usersData[0].experience)
+        experiences: this.formBuilder.array(this.usersData[0].experiences)
       });
     });
   }
@@ -42,6 +43,12 @@ export class FormComponent{
 
     submit(){
       console.log("value is: ",this.userForm.value);
+      const updatedUserData = { id:this.usersData[0].id , ...this.userForm.value};
+      console.log(this.usersData[0]," ---------- ",updatedUserData)
+      // console.log(this.userService.store(this.userForm.value));
+      this.userService.store(updatedUserData).subscribe(response => {
+        console.log('Data updated successfully:', response);
+      });
     }
 
     remove(index:number){
