@@ -7,10 +7,20 @@
       "phnNumber": "0170707502276",
       "experiences": [
         "C",
-        "java",
         "python",
         "Angular"
       ]
-    }
+    },
+    {
+        "id": "2",
+        "name": "hasan",
+        "email": "hasan@gmail.com",
+        "phnNumber": "0170707sdd502276",
+        "experiences": [
+          "C",
+          "python",
+          "Angular"
+        ]
+      }
   ]
 }

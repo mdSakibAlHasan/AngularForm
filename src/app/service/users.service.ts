@@ -7,8 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
   url = "http://localhost:3000/userData"
-  userData:any;
-  constructor(private http:HttpClient) { }
+  usersData:any;
+  constructor(private http:HttpClient) {
+    http.get(this.url).subscribe((data)=>{
+      this.usersData = data;
+    })
+   }
 
   getValue(){
     return this.http.get(this.url);
@@ -16,7 +20,11 @@ export class UsersService {
 
  store(userData: any): Observable<any> {
   const updateUrl = `${this.url}/${userData.id}`;
-  console.log(userData," in service")
+  //console.log(userData," in service")
     return this.http.put(updateUrl, userData);
+  }
+
+  getAllUser(){
+    return this.usersData;
   }
 }

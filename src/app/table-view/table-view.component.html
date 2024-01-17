@@ -1,0 +1,19 @@
+<h1>All users</h1>
+<table border="1">
+  <tbody>
+    <tr>
+      <th>Nmae</th>
+      <th>Email</th>
+      <th>Phone Number</th>
+      <th>Experience</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let user of usersData">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phnNumber}}</td>
+      <td><p *ngFor="let exp of user.experiences">{{exp}}</p></td>
+      <td><button (click)="editUser(user.id)">Edit</button> <button (click)="deleteUser(user.id)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
