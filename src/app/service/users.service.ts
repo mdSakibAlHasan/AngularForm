@@ -8,14 +8,22 @@ import { Observable } from 'rxjs';
 export class UsersService {
   url = "http://localhost:3000/userData"
   usersData:any;
+  userData:any;
   constructor(private http:HttpClient) {
     http.get(this.url).subscribe((data)=>{
+      console.log(data)
       this.usersData = data;
     })
+    console.log(this.userData);
    }
 
-  getValue(){
-    return this.http.get(this.url);
+  getValue(id:string){
+    for(let user of this.usersData){
+      if(id === user.id){
+        return user;
+      }
+    }
+    // return this.usersData.find((user: { id: string; }) => user.id === id);
   }
 
  store(userData: any): Observable<any> {
@@ -32,5 +40,12 @@ export class UsersService {
 
   getAllUser(){
     return this.usersData;
+  }
+
+  editUser(){
+    this.http.get(this.url).subscribe((data)=>{
+      console.log(data)
+      this.usersData = data;
+    })
   }
 }

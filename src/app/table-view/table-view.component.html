@@ -8,8 +8,8 @@
       <th>Experience</th>
       <th>Action</th>
     </tr>
-    <tr *ngFor="let user of usersData">
-      <td>{{user.name}}</td>
+    <tr  *ngFor="let user of usersData" >
+      <td >{{user.name}} </td>
       <td>{{user.email}}</td>
       <td>{{user.phnNumber}}</td>
       <td><p *ngFor="let exp of user.experiences">{{exp}}</p></td>
@@ -17,3 +17,8 @@
     </tr>
   </tbody>
 </table>
+
+@if(userID !== "0"){
+    <app-form [id]="userID"></app-form>
+}
+

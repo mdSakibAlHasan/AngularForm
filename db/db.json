@@ -26,18 +26,19 @@
     },
     {
       "id": "5b84",
-      "name": "sakib",
-      "email": "sakib@gmail.com",
-      "phnNumber": "0170707502276",
+      "name": "sakib al hasan",
+      "email": "sakibalhasan@gmail.com",
+      "phnNumber": "017070776",
       "experiences": [
         "Angular",
         "java",
-        "C++"
+        "C++",
+        "python"
       ]
     },
     {
       "id": "1e1a",
-      "name": "sakib",
+      "name": "Fahim",
       "email": "sakib@gmail.com",
       "phnNumber": "0170707502276",
       "experiences": [

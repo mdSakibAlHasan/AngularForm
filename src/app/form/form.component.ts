@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -16,21 +16,25 @@ import { UsersService } from '../service/users.service';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormComponent{
+export class FormComponent implements OnInit{
+  @Input() id="0";
+  userData: any;
   userForm: any;
-  usersData: any;
-
   constructor(private formBuilder: FormBuilder,private userService: UsersService ) {
-    this.userService.getValue().subscribe((data) => {
-      this.usersData = data;
-      console.log(data)
-      this.userForm = new FormGroup({
-        name: new FormControl(this.usersData[0].name),
-        email: new FormControl(this.usersData[0].email),
-        phnNumber: new FormControl(this.usersData[0].phnNumber),
-        experiences: this.formBuilder.array(this.usersData[0].experiences)
-      });
+    //console.log(this.id," in constructor")
+    
+  }
+
+  ngOnInit(): void {
+    this.userData = this.userService.getValue(this.id);
+    //console.log(this.id," in oninit")
+    this.userForm = new FormGroup({
+      name: new FormControl(this.userData.name),
+      email: new FormControl(this.userData.email),
+      phnNumber: new FormControl(this.userData.phnNumber),
+      experiences: this.formBuilder.array(this.userData.experiences)
     });
+  
   }
 
     get experiences() {
@@ -43,20 +47,21 @@ export class FormComponent{
 
     submit(){
       console.log("value is: ",this.userForm.value);
-      const updatedUserData = { id:this.usersData[0].id , ...this.userForm.value};
-      console.log(this.usersData[0]," ---------- ",updatedUserData)
+      const updatedUserData = { id:this.userData.id , ...this.userForm.value};
+      console.log(this.userData," ---------- ",updatedUserData)
       // console.log(this.userService.store(this.userForm.value));
       this.userService.store(updatedUserData).subscribe(response => {
         console.log('Data updated successfully:', response);
+        this.userService.editUser();
       });
     }
 
-    addUser(){
-      console.log(this.userForm.value)
-      this.userService.addUser(this.userForm.value).subscribe(response => {
-        console.log('User added successfully:', response);
-      });
-    }
+    // addUser(){
+    //   console.log(this.userForm.value)
+    //   this.userService.addUser(this.userForm.value).subscribe(response => {
+    //     console.log('User added successfully:', response);
+    //   });
+    // }
 
     remove(index:number){
       this.experiences.removeAt(index); 
