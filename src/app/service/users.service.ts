@@ -24,6 +24,12 @@ export class UsersService {
     return this.http.put(updateUrl, userData);
   }
 
+  addUser(userData:any){
+    //const updateUrl = `${this.url}/${userData.id}`;
+    //console.log(userData," in service")
+    return this.http.post(this.url, userData);
+  }
+
   getAllUser(){
     return this.usersData;
   }

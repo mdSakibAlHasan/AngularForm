@@ -51,6 +51,13 @@ export class FormComponent{
       });
     }
 
+    addUser(){
+      console.log(this.userForm.value)
+      this.userService.addUser(this.userForm.value).subscribe(response => {
+        console.log('User added successfully:', response);
+      });
+    }
+
     remove(index:number){
       this.experiences.removeAt(index); 
     }

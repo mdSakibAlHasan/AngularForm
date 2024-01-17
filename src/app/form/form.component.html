@@ -1,6 +1,6 @@
 <h2>User Form</h2>
 
-<form [formGroup]="userForm" (ngSubmit)="submit()">
+<form [formGroup]="userForm" >
   <label for="name">Name </label>
   <input id="name" type="text" formControlName="name" >
   <br><br>
@@ -24,5 +24,6 @@
 
 
   <br><br>
-  <input type="submit">
+  <button (click)="submit()">Update User</button>
+  <button (click)="addUser()">Add User</button>
 </form>
