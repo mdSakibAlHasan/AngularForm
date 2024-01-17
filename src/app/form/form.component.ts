@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-form',
@@ -13,20 +14,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormComponent {
-  constructor(private formBuilder: FormBuilder){}
-    userForm = new FormGroup({
-      name : new FormControl(''),
-      email : new FormControl(''),
-      phnNumber: new FormControl(''),
-      experiences: this.formBuilder.array([])
+export class FormComponent implements OnInit{
+  userData:any;
+  userForm:any;
+  constructor(private formBuilder: FormBuilder, private dataService:DataService){
+    this.userData = this.dataService.getData();
+    this.userForm = new FormGroup({
+      name : new FormControl(this.userData.name),
+      email : new FormControl(this.userData.email),
+      phnNumber: new FormControl(this.userData.phnNumber),
+      experiences: this.formBuilder.array(this.userData.experience)
     })
+  
+  }
 
-    get f() { return this.userForm.controls; }
+  
+    ngOnInit(): void {
+      console.log("oninit")
+      // this.userData = this.dataService.getData();
+      // this.userForm.controls.name = this.userData[0].name;
+    }
 
-    // Convenience getter for easy access to 'experience' FormArray
     get experiences() {
-      return this.f.experiences as FormArray;
+      return this.userForm.controls.experiences as FormArray;
     }
   
     addExperience() {
