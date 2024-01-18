@@ -6,45 +6,54 @@
       "email": "sakib@gmail.com",
       "phnNumber": "0170707502276",
       "experiences": [
-        "C",
         "python",
         "Angular",
         "java",
         "C++"
-      ]
-    },
-    {
-      "id": "2",
-      "name": "hasan",
-      "email": "hasan@gmail.com",
-      "phnNumber": "0170707sdd502276",
-      "experiences": [
-        "C",
-        "python",
-        "Angular"
-      ]
-    },
-    {
-      "id": "5b84",
-      "name": "sakib al hasan",
-      "email": "sakibalhasan@gmail.com",
-      "phnNumber": "017070776",
-      "experiences": [
-        "Angular",
-        "java",
-        "C++",
-        "python"
       ]
     },
     {
       "id": "1e1a",
       "name": "Fahim",
-      "email": "sakib@gmail.com",
+      "email": "fahim@gmail.com",
       "phnNumber": "0170707502276",
       "experiences": [
         "Angular",
         "java",
         "C++"
+      ]
+    },
+    {
+      "id": "83fc",
+      "name": "Momin",
+      "email": "bsse1212@gmail.com",
+      "phnNumber": "01707554",
+      "experiences": [
+        "C",
+        "Java",
+        "Kotlin"
+      ]
+    },
+    {
+      "id": "35c2",
+      "name": "sarif",
+      "email": "sarif@gmail.com",
+      "phnNumber": "01701654648",
+      "experiences": [
+        "mathlab",
+        ".Net",
+        "React"
+      ]
+    },
+    {
+      "id": "89c5",
+      "name": "heam",
+      "email": "mf.jb@gmail.com",
+      "phnNumber": "3543545354",
+      "experiences": [
+        "Bangla",
+        "English",
+        "Matj"
       ]
     }
   ]

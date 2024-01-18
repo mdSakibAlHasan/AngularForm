@@ -4,10 +4,12 @@ import { FormBuilder } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormArray } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { DataService } from '../service/data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from '../service/users.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-form',
@@ -17,24 +19,28 @@ import { UsersService } from '../service/users.service';
   styleUrl: './form.component.css'
 })
 export class FormComponent implements OnInit{
-  @Input() id="0";
   userData: any;
   userForm: any;
-  constructor(private formBuilder: FormBuilder,private userService: UsersService ) {
-    //console.log(this.id," in constructor")
-    
+  id:string="0";
+  title:string="User details";
+  constructor(private formBuilder: FormBuilder,private userService: UsersService, private route:ActivatedRoute, private location:Location ) {
+    this.id = this.route.snapshot.paramMap.get('id') || "0";
+    this.userForm = new FormGroup({
+      name: new FormControl(),
+      email: new FormControl(),
+      phnNumber: new FormControl(),
+      experiences: this.formBuilder.array([])
+    });  
   }
 
   ngOnInit(): void {
     this.userData = this.userService.getValue(this.id);
-    //console.log(this.id," in oninit")
     this.userForm = new FormGroup({
-      name: new FormControl(this.userData.name),
-      email: new FormControl(this.userData.email),
-      phnNumber: new FormControl(this.userData.phnNumber),
-      experiences: this.formBuilder.array(this.userData.experiences)
-    });
-  
+      name: new FormControl(this.userData?.name),
+      email: new FormControl(this.userData?.email),
+      phnNumber: new FormControl(this.userData?.phnNumber),
+      experiences: this.formBuilder.array(this.userData?.experiences)
+    });  
   }
 
     get experiences() {
@@ -46,25 +52,25 @@ export class FormComponent implements OnInit{
     }
 
     submit(){
-      console.log("value is: ",this.userForm.value);
-      const updatedUserData = { id:this.userData.id , ...this.userForm.value};
-      console.log(this.userData," ---------- ",updatedUserData)
-      // console.log(this.userService.store(this.userForm.value));
-      this.userService.store(updatedUserData).subscribe(response => {
-        console.log('Data updated successfully:', response);
-        this.userService.editUser();
-      });
+      if(this.id==="0"){
+        this.userService.addUser(this.userForm.value).subscribe(response => {
+          console.log('User added successfully:', response);
+          this.userService.editUser();
+        });
+      }else{
+        const updatedUserData = { id:this.userData.id , ...this.userForm.value};
+        this.userService.store(updatedUserData).subscribe(response => {
+          console.log('Data updated successfully:', response);
+          this.userService.editUser();
+        });
+      }    
     }
-
-    // addUser(){
-    //   console.log(this.userForm.value)
-    //   this.userService.addUser(this.userForm.value).subscribe(response => {
-    //     console.log('User added successfully:', response);
-    //   });
-    // }
 
     remove(index:number){
       this.experiences.removeAt(index); 
     }
-  
+
+    goBack(){
+      this.location.back();
+    }  
 }

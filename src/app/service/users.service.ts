@@ -33,8 +33,6 @@ export class UsersService {
   }
 
   addUser(userData:any){
-    //const updateUrl = `${this.url}/${userData.id}`;
-    //console.log(userData," in service")
     return this.http.post(this.url, userData);
   }
 
@@ -47,5 +45,10 @@ export class UsersService {
       console.log(data)
       this.usersData = data;
     })
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    const url = `${this.url}/${userId}`; 
+    return this.http.delete(url);
   }
 }

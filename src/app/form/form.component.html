@@ -1,4 +1,4 @@
-<h2>User Form</h2>
+<h2>{{title}}</h2>
 
 <form [formGroup]="userForm" >
   <label for="name">Name </label>
@@ -24,6 +24,8 @@
 
 
   <br><br>
-  <button (click)="submit()">Update User</button>
+  
+  <button (click)="submit()">Save</button>
+  <button (click)="goBack()">Back</button>
   <!-- <button (click)="addUser()">Add User</button> -->
 </form>

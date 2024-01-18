@@ -1,4 +1,6 @@
 <h1>All users</h1>
+<a routerLink="/newUser"><button>Add new</button></a>
+
 <table border="1">
   <tbody>
     <tr>
@@ -13,12 +15,9 @@
       <td>{{user.email}}</td>
       <td>{{user.phnNumber}}</td>
       <td><p *ngFor="let exp of user.experiences">{{exp}}</p></td>
-      <td><button (click)="editUser(user.id)">Edit</button> <button (click)="deleteUser(user.id)">Delete</button></td>
+      <td>
+        <a routerLink="/user/{{user.id}}"><button >Edit</button></a>
+        <button (click)="deleteUser(user.id)">Delete</button></td>
     </tr>
   </tbody>
 </table>
-
-@if(userID !== "0"){
-    <app-form [id]="userID"></app-form>
-}
-
